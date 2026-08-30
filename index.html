@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- lang="es" especifica que el contenido está en español para navegadores y motores de búsqueda -->
+<head>
+    <!-- Sección de encabezado: contiene metadatos, estilos y configuración de la página -->
+
+    <!-- Define la codificación de caracteres como UTF-8 para soportar acentos, caracteres especiales, etc. -->
+    <meta charset="UTF-8">
+    <!-- Viewport: asegura que la página se vea correctamente en dispositivos móviles y se escale automáticamente -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Zeruell Games | Tu tienda de Videojuegos</title>
+    <!-- Vincula la hoja de estilos CSS externa para aplicar diseño y formato a la página -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Cuerpo principal de la página donde va todo el contenido visible -->
+
+    <!-- ENCABEZADO: Contiene el logo y menú de navegación principal -->
+    <header class="header">
+        <!-- Logo de la tienda que aparece en la esquina superior izquierda -->
+        <div class="logo">Zeruell Games</div>
+        <!-- Barra de navegación: agrupa los enlaces principales del sitio -->
+        <nav class="navbar">
+            <!-- Lista desordenada que contiene los enlaces de navegación -->
+            <ul class="nav-links">
+                <!-- Cada <li> es un elemento de lista que contiene un enlace de navegación -->
+                <li><a href="#">Inicio</a></li>        <!-- Enlace a la página principal -->
+                <li><a href="#">Catálogo</a></li>       <!-- Enlace al catálogo de juegos -->
+                <li><a href="#">Ofertas</a></li>        <!-- Enlace a juegos en promoción -->
+                <li><a href="#">Contacto</a></li>       <!-- Enlace a página de contacto -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL: Sección central de la página con toda la información importante -->
+    <main class="main-content">
+        <!-- SECCIÓN HERO: Banner al tope de la página con título y descripción -->
+        <section class="hero">
+            <!-- Título principal (H1): eslogan principal de la tienda, importante para SEO -->
+            <h1>¡Descubre tu próxima aventura!</h1>
+            <!-- Subtítulo descriptivo de la tienda -->
+            <p>Los mejores títulos para todas las plataformas.</p>
+        </section>
+
+        <!-- SECCIÓN DE PRODUCTOS: Catálogo de juegos que se venden en la tienda -->
+        <section class="products">
+            <!-- Título de sección (H2): identifica la sección de productos destacados -->
+            <h2>Catálogo de Juegos Disponibles</h2>
+            <!-- Contenedor Grid: usa CSS Grid para distribuir las tarjetas de productos automáticamente en columnas responsivas -->
+            <div class="grid-container">
+                <!-- TARJETA DE PRODUCTO 1 -->
+                <article class="game-card">
+                    <!-- Imagen del juego con ruta (src) y descripción (alt) para accesibilidad -->
+                    <img src="img/cyberpunk_2077.jpg" alt="Portada del juego Cyberpunk 2077" class="game-img">
+                    <!-- Nombre del juego con plataforma entre corchetes -->
+                    <h3>Cyberpunk 2077 - [PC]</h3>
+                    <!-- Precio del juego con clase especial para estilos (color destaca el precio) -->
+                    <p class="price">$29.990</p>
+                    <!-- Botón interactivo: permite al usuario agregar el juego al carrito de compra -->
+                    <button type="button">Añadir al carrito</button> <!-- Funcionalidad de carrito pendiente de implementar -->
+                </article>
+                <!-- TARJETA DE PRODUCTO 2 -->
+                <article class="game-card">
+                    <img src="img/elden_ring.jpg" alt="Portada del juego Elden Ring" class="game-img">
+                    <h3>Elden Ring - [PS5]</h3>
+                    <p class="price">$59.990</p>
+                    <button type="button">Añadir al carrito</button>
+                </article>
+                <!-- TARJETA DE PRODUCTO 3 -->
+                <article class="game-card">
+                    <img src="img/poe_2.jpg" alt="Portada del juego Path of Exile 2" class="game-img">
+                    <h3>Path of Exile 2 - [PC]</h3>
+                    <p class="price">$39.990</p>
+                    <button type="button">Añadir al carrito</button>
+                </article>
+                <!-- TARJETA DE PRODUCTO 4 -->
+                <article class="game-card">
+                    <img src="img/spiderman_2.jpg" alt="Portada del juego Spider-Man 2" class="game-img">
+                    <h3>Spider-Man 2 - [PS5]</h3>
+                    <p class="price">$49.990</p>
+                    <button type="button">Añadir al carrito</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA: Información de copyright y enlaces legales, redes sociales y etc. -->
+    <footer class="footer">
+        <!-- Párrafo de copyright: indica los derechos de autor y año de creación -->
+        <p>&copy; 2026 Zeruell Games. Todos los derechos reservados.</p>
+        <!-- Contenedor de enlaces a redes sociales -->
+        <div class="social-links">
+            <!-- Grupo de enlaces habituales: términos legales, privacidad, soporte y redes sociales -->
+            <div class="footer-links">
+                <a href="#">Términos legales</a> | <a href="#">Privacidad</a> | <a href="#">Soporte</a> | <a href="#">Instagram</a> | <a href="#">X</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+/* ========================================
+   1. VARIABLES CSS Y TIPOGRAFÍA
+   ========================================
+   Las variables CSS (:root) permiten definir valores reutilizables en toda la hoja de estilos.
+   Si se necesita cambiar un color, se debe cambiar desde esta plantilla y se aplica en todos lados automáticamente.
+*/
+:root {
+    /* Color de fondo principal: Fondo oscuro */
+    --bg-dark: #030000;
+    
+    /* Color de fondo para tarjetas: ligeramente más claro que el fondo principal */
+    --bg-card: #1e1e1e;
+    
+    /* Color de texto principal: blanco para contraste sobre fondos oscuros */
+    --text-light: #f5f5f5;
+    
+    /* Color de acento: cian/turquesa brillante para destacar elementos importantes (logo, botones, precios) */
+    --accent-color: #00ffcc;
+    
+    /* Familia de tipografía: 'Open Sans'; las demás son alternativas. */
+    --font-main: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ========================================
+   2. RESETEO Y MODELO DE CAJAS
+   ========================================
+   El selector * afecta a TODOS los elementos de la página.
+   Estos estilos normalizan la apariencia y eliminan márgenes/espacios por defecto del navegador.
+*/
+* {
+    /* Elimina márgenes externos (espacios fuera del elemento) --> */
+    margin: 0;
+    
+    /* Elimina espacios internos/relleno (espacios dentro del elemento) --> */
+    padding: 0;
+    
+    /* border-box: hace que el ancho total de un elemento = ancho + borde + relleno (más intuitivo) --> */
+    box-sizing: border-box;
+}
+
+/* ESTILOS DEL CUERPO: Aplica estilos generales a toda la página */
+body {
+    /* Color de fondo usando variable CSS: fondo gris oscuro --> */
+    background-color: var(--bg-dark);
+    
+    /* Color del texto usando variable CSS: blanco claro para contraste --> */
+    color: var(--text-light);
+    
+    /* Tipografía de la página usando variable CSS --> */
+    font-family: var(--font-main);
+    
+    /* Salto de línea o interlineado --> */
+    line-height: 1.5;
+}
+
+/* ========================================
+   3. FLEXBOX: ENCABEZADO Y NAVEGACIÓN
+   ========================================
+   Flexbox es un modelo de diseño que alinea elementos en una fila o columna automáticamente.
+*/
+
+/* ESTILOS DEL ENCABEZADO: La barra de navegación superior */
+.header {
+    /* Activa Flexbox: permite alinear elementos hijo (logo y nav) en una fila --> */
+    display: flex;
+    
+    /* Distribuye los elementos en los extremos (logo a la izquierda, nav a la derecha) --> */
+    justify-content: space-between;
+    
+    /* Centra los elementos verticalmente --> */
+    align-items: center;
+    
+    /* Espaciado interno: 1.5rem arriba/abajo, 5% izquierda/derecha (responde al ancho de pantalla) --> */
+    padding: 1.5rem 5%;
+    
+    /* Color de fondo --> */
+    background-color: #000;
+
+    /* Borde superior: línea de 5px de grosor en color acento para separar del contenido --> */
+    border-top: 5px solid var(--accent-color);
+    
+    /* Borde inferior: línea de 5px de grosor en color acento para separar del contenido --> */
+    border-bottom: 5px solid var(--accent-color);    
+}
+
+/* ESTILOS DEL LOGO: Nombre de la tienda en la esquina izquierda --> */
+.logo {
+    /* Tamaño de fuente del logo --> */
+    font-size: 2rem;
+    
+    /* Peso de fuente: bold = Negrita --> */
+    font-weight: bold;
+    
+    /* Color: se usa el color de acento --> */
+    color: var(--accent-color);
+}
+
+/* ESTILOS DE LISTA DE NAVEGACIÓN: Links del menú horizontal --> */
+.nav-links {
+    /* Elimina los puntos que aparecen en listas --> */
+    list-style: none;
+    
+    /* Convierte la lista vertical en horizontal --> */
+    display: flex;
+    
+    /* Espacio entre elementos de la lista: 2rem = 32px aproximadamente --> */
+    gap: 2rem;
+
+    /* Peso de fuente: bold = Negrita --> */
+    font-weight: bold;
+}
+
+/* ESTILOS DE ENLACES: Cada link del menú de navegación --> */
+.nav-links a {
+    /* Color del texto: blanco claro --> */
+    color: var(--text-light);
+    
+    /* Elimina el subrayado que normalmente tienen los enlaces --> */
+    text-decoration: none;
+    
+    /* Transición suave: cuando cambie el color, tardará 0.3s en completarse --> */
+    transition: color 0.3s;
+}
+
+/* EFECTO HOVER: Interacción cuando el usuario pasa el mouse sobre un enlace --> */
+.nav-links a:hover {
+    /* Cambiar el color al color de acento cuando el usuario pasa el mouse --> */
+    color: var(--accent-color);
+}
+
+/* ========================================
+   SECCIONES GENERALES: HERO Y PRODUCTOS
+   ======================================== */
+
+/* ESTILOS DEL BANNER PRINCIPAL (HERO): El área de presentación principal --> */
+.hero {
+    /* Centra el texto horizontalmente --> */
+    text-align: center;
+    
+    /* Espaciado: 4rem arriba/abajo, 2rem izquierda/derecha --> */
+    padding: 4rem 2rem;
+}
+
+/* ESTILOS DE LA SECCIÓN DE PRODUCTOS: Contenedor para el catálogo de juegos --> */
+.products {
+    /* Espaciado responsivo: 2rem arriba/abajo, 5% del ancho izquierda/derecha --> */
+    padding: 2rem 5%;
+}
+
+/* ESTILOS DEL TÍTULO DE PRODUCTOS: El H2 que dice "Catálogo de Juegos Disponibles" --> */
+.products h2 {
+    /* Espaciado inferior: separación entre título y productos --> */
+    margin-bottom: 2rem;
+    
+    /* Centra el título horizontalmente --> */
+    text-align: center;
+}
+
+/* ========================================
+   4. CSS GRID: CATÁLOGO DE PRODUCTOS
+   ========================================
+   Grid es un sistema de diseño que organiza elementos en filas y columnas.
+   repeat(auto-fit, minmax(250px, 1fr)) = hace que sea responsivo automáticamente.
+*/
+
+/* CONTENEDOR GRID: Agrupa todas las tarjetas de productos --> */
+.grid-container {
+    /* Activa CSS Grid: organiza elementos en filas y columnas automáticamente --> */
+    display: grid;
+    
+    /* Configuración de columnas:
+       repeat(auto-fit, minmax(250px, 1fr))
+       - auto-fit: ajusta el número de columnas automáticamente según el espacio disponible
+       - minmax(250px, 1fr): cada columna tiene MÍNIMO 250px de ancho, MÁXIMO se expande igual que otras (1fr = 1 fracción)
+       - Resultado: en móvil 1 columna, tablet 2 columnas, desktop 3-4 columnas, de forma automática
+    */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    
+    /* Espaciado entre tarjetas: 2rem = ~32px entre filas y columnas --> */
+    gap: 2rem;
+}
+
+/* ESTILOS DE TARJETA DE PRODUCTO: Cada juego en una caja individual --> */
+.game-card {
+    /* Color de fondo: gris oscuro usando variable CSS --> */
+    background-color: var(--bg-card);
+    
+    /* Espaciado interno: 1.5rem en todos los lados para que el contenido no toque los bordes --> */
+    padding: 1.5rem;
+    
+    /* Bordes redondeados: Mejora el aspecto --> */
+    border-radius: 50px;
+    
+    /* Centra el contenido horizontalmente --> */
+    text-align: center;
+    
+    /* Borde tarjeta: línea alrededor de la tarjeta --> */
+    border: 2px solid #333;
+    
+    /* Transición suave: cambios con animación --> */
+    transition: transform 0.3s;
+}
+
+/* EFECTO HOVER TARJETA */
+.game-card:hover {
+    /* Mueve la tarjeta 20px hacia arriba para efecto de elevación/profundidad --> */
+    transform: translateY(-20px);
+    
+    /* Cambia el borde al color de acento (cian) para resaltar --> */
+    border-color: var(--accent-color);
+}
+
+/* ESTILOS DE IMAGEN DEL JUEGO: La portada/carátula de cada juego --> */
+.game-img {
+    /* Ancho: ocupa el 90% del ancho de la tarjeta para dejar espacios laterales --> */
+    width: 90%;
+    
+    /* Alto fijo: 400px asegura que todas las imágenes tengan la misma altura --> */
+    height: 400px;
+    
+    /* object-fit: cover = recorta la imagen para llenar el espacio sin deformarla ni dejar espacios en blanco --> */
+    object-fit: cover;
+    
+    /* Bordes ligeramente redondeados en la imagen --> */
+    border-radius: 20px;
+    
+    /* Espacio inferior entre imagen y resto del contenido --> */
+    margin-bottom: 1rem;
+}
+
+/* ESTILOS DEL PRECIO: El texto que muestra precio del juego --> */
+.price {
+    /* Tamaño de fuente --> */
+    font-size: 1.2rem;
+    
+    /* Letra negrita para que destaque --> */
+    font-weight: bold;
+    
+    /* Color: Mismo del acento (cian) para destacar de los demás textos --> */
+    color: var(--accent-color);
+    
+    /* Espaciado: 0.5rem arriba y abajo --> */
+    margin: 0.5rem 0;
+}
+
+/* ESTILOS DEL BOTÓN: Botón "Añadir al carrito" --> */
+button {
+    /* Color de fondo: color de acento (cian) --> */
+    background-color: var(--accent-color);
+    
+    /* Color del texto: negro para contraste sobre el fondo cian --> */
+    color: #000;
+    
+    /* Sin borde: elimina el borde por defecto del navegador --> */
+    border: none;
+    
+    /* Relleno: 0.8rem arriba/abajo, 1.5rem izquierda/derecha --> */
+    padding: 0.8rem 1.5rem;
+    
+    /* Bordes redondeados 30px --> */
+    border-radius: 30px;
+    
+    /* cursor: pointer = cambia el cursor a una mano cuando se pasa sobre el botón --> */
+    cursor: pointer;
+    
+    /* Letra negrita --> */
+    font-weight: bold;
+}
+
+/* EFECTO HOVER DEL BOTÓN: Lo que sucede cuando el usuario pasa el mouse sobre el botón --> */
+button:hover {
+    /* Cambia el color a un cian más oscuro para feedback visual --> */
+    background-color: #00cca3c2;
+}
+
+/* ========================================
+   5. FLEXBOX: PIE DE PÁGINA (FOOTER)
+   ======================================== */
+
+/* ESTILOS DEL PIE DE PÁGINA: Sección inferior con copyright e información --> */
+.footer {
+    /* Activa Flexbox para alinear elementos --> */
+    display: flex;
+    
+    /* Dirección: column = agrupa los elementos verticalmente --> */
+    flex-direction: column;
+    
+    /* Centra los elementos horizontalmente --> */
+    align-items: center;
+    
+    /* Espaciado interno: 2rem en todos los lados --> */
+    padding: 2rem;
+    
+    /* Color de fondo: negro --> */
+    background-color: #000;
+    
+    /* Espaciado superior: separación entre el contenido y el footer --> */
+    margin-top: 3rem;
+    
+    /* Espacio entre elementos internos (copyright y redes sociales) --> */
+    gap: 1rem;
+}
+
+/* CONTENEDOR DE REDES SOCIALES: Agrupa los enlaces a redes sociales --> */
+.social-links {
+    /* Activa Flexbox para mostrar los enlaces en una fila horizontal --> */
+    display: flex;
+    
+    /* Espaciado entre los enlaces de redes sociales --> */
+    gap: 1.5rem;
+}
+
+/* ESTILOS DE ENLACES DE REDES SOCIALES: Los links a Instagram, Twitter, etc. --> */
+.social-links a {
+    /* Color: usa el color de acento para que sea llamativo --> */
+    color: var(--accent-color);
+    
+    /* Elimina el subrayado predeterminado de los enlaces --> */
+    text-decoration: none;
+}
+
+/* ========================================
+   6. MEDIA QUERIES: DISEÑO RESPONSIVO
+   ========================================
+   Media queries permiten cambiar estilos según el tamaño de la pantalla.
+   @media (max-width: 768px) = estos estilos se aplican en pantallas de 768px o MENOS (tablets y móviles).
+*/
+@media (max-width: 768px) {
+    
+    /* En pantallas pequeñas, el encabezado se apila verticalmente --> */
+    .header {
+        /* Cambia de fila (row) a columna (column): logo y nav se alinean verticalmente --> */
+        flex-direction: column;
+        
+        /* Espaciado entre logo y nav --> */
+        gap: 1rem;
+    }
+    
+    /* En pantallas pequeñas, los enlaces de navegación también se apilan verticalmente --> */
+    .nav-links {
+        /* Convierte la lista horizontal en vertical --> */
+        flex-direction: column;
+        
+        /* Centra los enlaces horizontalmente --> */
+        align-items: center;
+        
+        /* Espaciado entre enlaces --> */
+        gap: 1rem;
+    }
+}
