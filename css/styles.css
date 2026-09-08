@@ -41,7 +41,7 @@
 /* ESTILOS DEL CUERPO: Aplica estilos generales a toda la página */
 body {
     /* Color de fondo usando variable CSS: fondo gris oscuro --> */
-    background-color: var(--bg-dark);
+    background-color: var(--bg-dark) !important;
     
     /* Color del texto usando variable CSS: blanco claro para contraste --> */
     color: var(--text-light);
@@ -61,18 +61,6 @@ body {
 
 /* ESTILOS DEL ENCABEZADO: La barra de navegación superior */
 .header {
-    /* Activa Flexbox: permite alinear elementos hijo (logo y nav) en una fila --> */
-    display: flex;
-    
-    /* Distribuye los elementos en los extremos (logo a la izquierda, nav a la derecha) --> */
-    justify-content: space-between;
-    
-    /* Centra los elementos verticalmente --> */
-    align-items: center;
-    
-    /* Espaciado interno: 1.5rem arriba/abajo, 5% izquierda/derecha (responde al ancho de pantalla) --> */
-    padding: 1.5rem 5%;
-    
     /* Color de fondo --> */
     background-color: #000;
 
@@ -86,13 +74,13 @@ body {
 /* ESTILOS DEL LOGO: Nombre de la tienda en la esquina izquierda --> */
 .logo {
     /* Tamaño de fuente del logo --> */
-    font-size: 2rem;
+    font-size: 2rem !important;
     
     /* Peso de fuente: bold = Negrita --> */
     font-weight: bold;
     
     /* Color: se usa el color de acento --> */
-    color: var(--accent-color);
+    color: var(--accent-color) !important;
 }
 
 /* ESTILOS DE LISTA DE NAVEGACIÓN: Links del menú horizontal --> */
@@ -100,12 +88,6 @@ body {
     /* Elimina los puntos que aparecen en listas --> */
     list-style: none;
     
-    /* Convierte la lista vertical en horizontal --> */
-    display: flex;
-    
-    /* Espacio entre elementos de la lista: 2rem = 32px aproximadamente --> */
-    gap: 2rem;
-
     /* Peso de fuente: bold = Negrita --> */
     font-weight: bold;
 }
@@ -113,7 +95,7 @@ body {
 /* ESTILOS DE ENLACES: Cada link del menú de navegación --> */
 .nav-links a {
     /* Color del texto: blanco claro --> */
-    color: var(--text-light);
+    color: var(--text-light) !important;
     
     /* Elimina el subrayado que normalmente tienen los enlaces --> */
     text-decoration: none;
@@ -125,7 +107,7 @@ body {
 /* EFECTO HOVER: Interacción cuando el usuario pasa el mouse sobre un enlace --> */
 .nav-links a:hover {
     /* Cambiar el color al color de acento cuando el usuario pasa el mouse --> */
-    color: var(--accent-color);
+    color: var(--accent-color) !important; /* !important asegura que este estilo tenga prioridad sobre otros estilos que puedan aplicarse al mismo elemento --> */
 }
 
 /* ========================================
@@ -136,9 +118,13 @@ body {
 .hero {
     /* Centra el texto horizontalmente --> */
     text-align: center;
-    
-    /* Espaciado: 4rem arriba/abajo, 2rem izquierda/derecha --> */
-    padding: 4rem 2rem;
+}
+
+/* Control de altura para imágenes del Carrusel en Bootstrap */
+.carousel-img {
+    height: 40vh; /* 40% de la altura de la ventana del navegador para mantener proporción y responsividad --> */
+    object-fit: cover;
+    object-position: 50% 35%; /* Centra la imagen en el carrusel. Primer valor: posición horizontal, segundo valor: posición vertical --> */
 }
 
 /* ESTILOS DE LA SECCIÓN DE PRODUCTOS: Contenedor para el catálogo de juegos --> */
@@ -149,9 +135,6 @@ body {
 
 /* ESTILOS DEL TÍTULO DE PRODUCTOS: El H2 que dice "Catálogo de Juegos Disponibles" --> */
 .products h2 {
-    /* Espaciado inferior: separación entre título y productos --> */
-    margin-bottom: 2rem;
-    
     /* Centra el título horizontalmente --> */
     text-align: center;
 }
@@ -160,45 +143,28 @@ body {
    4. CSS GRID: CATÁLOGO DE PRODUCTOS
    ========================================
    Grid es un sistema de diseño que organiza elementos en filas y columnas.
-   repeat(auto-fit, minmax(250px, 1fr)) = hace que sea responsivo automáticamente.
+   (Nota: Reemplazado en HTML por el Grid nativo de Bootstrap 'row' y 'col-')
 */
-
-/* CONTENEDOR GRID: Agrupa todas las tarjetas de productos --> */
-.grid-container {
-    /* Activa CSS Grid: organiza elementos en filas y columnas automáticamente --> */
-    display: grid;
-    
-    /* Configuración de columnas:
-       repeat(auto-fit, minmax(250px, 1fr))
-       - auto-fit: ajusta el número de columnas automáticamente según el espacio disponible
-       - minmax(250px, 1fr): cada columna tiene MÍNIMO 250px de ancho, MÁXIMO se expande igual que otras (1fr = 1 fracción)
-       - Resultado: en móvil 1 columna, tablet 2 columnas, desktop 3-4 columnas, de forma automática
-    */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    
-    /* Espaciado entre tarjetas: 2rem = ~32px entre filas y columnas --> */
-    gap: 2rem;
-}
 
 /* ESTILOS DE TARJETA DE PRODUCTO: Cada juego en una caja individual --> */
 .game-card {
     /* Color de fondo: gris oscuro usando variable CSS --> */
-    background-color: var(--bg-card);
+    background-color: var(--bg-card) !important;
     
     /* Espaciado interno: 1.5rem en todos los lados para que el contenido no toque los bordes --> */
-    padding: 1.5rem;
+    padding: 1rem;
     
     /* Bordes redondeados: Mejora el aspecto --> */
-    border-radius: 50px;
+    border-radius: 30px !important;
     
     /* Centra el contenido horizontalmente --> */
     text-align: center;
     
     /* Borde tarjeta: línea alrededor de la tarjeta --> */
-    border: 2px solid #333;
+    border: 2px solid #333 !important;
     
     /* Transición suave: cambios con animación --> */
-    transition: transform 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
 /* EFECTO HOVER TARJETA */
@@ -207,16 +173,13 @@ body {
     transform: translateY(-20px);
     
     /* Cambia el borde al color de acento (cian) para resaltar --> */
-    border-color: var(--accent-color);
+    border-color: var(--accent-color) !important;
 }
 
 /* ESTILOS DE IMAGEN DEL JUEGO: La portada/carátula de cada juego --> */
 .game-img {
-    /* Ancho: ocupa el 90% del ancho de la tarjeta para dejar espacios laterales --> */
-    width: 90%;
-    
-    /* Alto fijo: 400px asegura que todas las imágenes tengan la misma altura --> */
-    height: 400px;
+    /* Alto fijo: 350px asegura que todas las imágenes tengan la misma altura en las tarjetas de Bootstrap --> */
+    height: 350px;
     
     /* object-fit: cover = recorta la imagen para llenar el espacio sin deformarla ni dejar espacios en blanco --> */
     object-fit: cover;
@@ -238,39 +201,30 @@ body {
     
     /* Color: Mismo del acento (cian) para destacar de los demás textos --> */
     color: var(--accent-color);
-    
-    /* Espaciado: 0.5rem arriba y abajo --> */
-    margin: 0.5rem 0;
 }
 
 /* ESTILOS DEL BOTÓN: Botón "Añadir al carrito" --> */
-button {
+.custom-btn {
     /* Color de fondo: color de acento (cian) --> */
-    background-color: var(--accent-color);
+    background-color: var(--accent-color) !important;
     
     /* Color del texto: negro para contraste sobre el fondo cian --> */
-    color: #000;
+    color: #000 !important;
     
     /* Sin borde: elimina el borde por defecto del navegador --> */
-    border: none;
-    
-    /* Relleno: 0.8rem arriba/abajo, 1.5rem izquierda/derecha --> */
-    padding: 0.8rem 1.5rem;
+    border: none !important;
     
     /* Bordes redondeados 30px --> */
-    border-radius: 30px;
-    
-    /* cursor: pointer = cambia el cursor a una mano cuando se pasa sobre el botón --> */
-    cursor: pointer;
+    border-radius: 30px !important;
     
     /* Letra negrita --> */
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 /* EFECTO HOVER DEL BOTÓN: Lo que sucede cuando el usuario pasa el mouse sobre el botón --> */
-button:hover {
+.custom-btn:hover {
     /* Cambia el color a un cian más oscuro para feedback visual --> */
-    background-color: #00cca3c2;
+    background-color: #00cca3c2 !important;
 }
 
 /* ========================================
@@ -317,34 +271,4 @@ button:hover {
     
     /* Elimina el subrayado predeterminado de los enlaces --> */
     text-decoration: none;
-}
-
-/* ========================================
-   6. MEDIA QUERIES: DISEÑO RESPONSIVO
-   ========================================
-   Media queries permiten cambiar estilos según el tamaño de la pantalla.
-   @media (max-width: 768px) = estos estilos se aplican en pantallas de 768px o MENOS (tablets y móviles).
-*/
-@media (max-width: 768px) {
-    
-    /* En pantallas pequeñas, el encabezado se apila verticalmente --> */
-    .header {
-        /* Cambia de fila (row) a columna (column): logo y nav se alinean verticalmente --> */
-        flex-direction: column;
-        
-        /* Espaciado entre logo y nav --> */
-        gap: 1rem;
-    }
-    
-    /* En pantallas pequeñas, los enlaces de navegación también se apilan verticalmente --> */
-    .nav-links {
-        /* Convierte la lista horizontal en vertical --> */
-        flex-direction: column;
-        
-        /* Centra los enlaces horizontalmente --> */
-        align-items: center;
-        
-        /* Espaciado entre enlaces --> */
-        gap: 1rem;
-    }
 }
