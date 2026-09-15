@@ -260,6 +260,9 @@ body {
     /* Activa Flexbox para mostrar los enlaces en una fila horizontal --> */
     display: flex;
     
+    /* Centra los enlaces horizontalmente --> */
+    justify-content: center;
+
     /* Espaciado entre los enlaces de redes sociales --> */
     gap: 1.5rem;
 }
