@@ -139,40 +139,74 @@ function crearTarjetaHardware(producto) { // Función para crear dinámicamente 
 
 /**
  * ============================================================================
- * PASO 3: FETCH API Y PROMESAS (Refactorizado según retroalimentación Formativa 4)
- * Reemplazo de innerHTML por textContent (para evitar vulnerabilidades de inyección)
+ * PASO 3 y 4: FETCH API AVANZADO Y PROMESAS (Refactorizado según retroalimentación Formativa 4)
+ * Reemplazo de innerHTML por textContent (para evitar vulnerabilidades de inyección).
+ * Implementa resiliencia ante fallos de red y optimiza la carga usando localStorage temporal.
  * ============================================================================
  */
-function cargarHardwareDesdeAPI() { // Función para cargar hardware desde la API y manejar errores de forma segura
+async function cargarHardwareDesdeAPI(reintentosMaximos = 3) { // Función para cargar hardware desde la API y manejar errores de forma segura
     const apiContainer = document.getElementById('api-hardware');
+    const CACHE_KEY = 'hardware_data_zeruell';
+    const CACHE_TIME_KEY = 'hardware_time_zeruell';
+    const TIEMPO_EXPIRACION = 1000 * 60 * 60; // 1 hora en milisegundos
     
-    // Mostramos estado de carga usando textContent de forma segura
-    apiContainer.textContent = 'Cargando Hardware oficial...';
-    apiContainer.className = 'row g-4 text-center text-info fw-bold';
+    // 1. ESTRATEGIA DE CACHÉ: Revisar si ya tenemos los datos guardados
+    const datosGuardados = localStorage.getItem(CACHE_KEY); // Recupera los datos guardados en localStorage
+    const tiempoGuardado = localStorage.getItem(CACHE_TIME_KEY); // Recupera el tiempo en que se guardaron los datos
+    const tiempoActual = new Date().getTime(); // Obtiene el tiempo actual en milisegundos
 
-    fetch('https://fakestoreapi.com/products/category/electronics?limit=4')
-        .then(respuesta => {
-            if (!respuesta.ok) {
-                throw new Error('Error al conectar con el servidor');
+    if (datosGuardados && tiempoGuardado && (tiempoActual - tiempoGuardado < TIEMPO_EXPIRACION)) { // Si los datos están en caché y no han expirado
+        console.log("Cargando hardware desde la caché local.");
+        renderizarHardware(JSON.parse(datosGuardados), apiContainer);
+        return; // Sale de la función sin hacer la petición web nuevamente
+    }
+
+    // 2. ESTRATEGIA DE REINTENTOS: Fetch con manejo avanzado de errores
+    for (let intento = 1; intento <= reintentosMaximos; intento++) {
+        try {
+            apiContainer.textContent = `Conectando con el servidor (Intento ${intento}/${reintentosMaximos})...`; // Mensaje de estado mientras se intenta la conexión
+            apiContainer.className = 'row g-4 text-center text-info fw-bold'; // Clase de estilo para el mensaje de estado
+
+            // Petición a la API
+            const respuesta = await fetch('https://fakestoreapi.com/products/category/electronics?limit=4');
+            
+            if (!respuesta.ok) throw new Error(`Fallo en el servidor: ${respuesta.status}`); // Lanza un error si la respuesta no es exitosa
+            
+            const datos = await respuesta.json(); // Convierte la respuesta en JSON
+
+            // Guardamos los datos nuevos en la caché del navegador
+            localStorage.setItem(CACHE_KEY, JSON.stringify(datos)); // Guardamos los datos en localStorage como string
+            localStorage.setItem(CACHE_TIME_KEY, tiempoActual.toString()); // Guardamos el tiempo actual en localStorage para controlar la expiración
+
+            // Renderizamos los productos
+            console.log("Datos obtenidos de la API y guardados en caché.");
+            renderizarHardware(datos, apiContainer); // Renderiza los productos en el contenedor del DOM
+            
+            return; // Éxito, sale del ciclo de reintentos
+
+        } catch (error) { // Captura cualquier error de red o de la API
+            console.warn(`Intento ${intento} fallido:`, error.message); // Muestra un mensaje de advertencia en la consola
+            
+            if (intento === reintentosMaximos) { // Si es el último intento, mostramos el estado vacío/error al usuario
+                apiContainer.textContent = 'Servicio no disponible momentáneamente. Por favor, revisa tu conexión o intenta más tarde.';
+                apiContainer.className = 'row g-4 text-center text-danger fw-bold';
+            } else {
+                // Pausa artificial de 1.5 segundos antes del siguiente intento
+                await new Promise(resolve => setTimeout(resolve, 1500));
             }
-            return respuesta.json();
-        })
-        .then(datos => {
-            // Limpieza segura del mensaje de carga
-            apiContainer.textContent = '';
-            // Restauramos la clase original del grid
-            apiContainer.className = 'row g-4';
+        }
+    }
+}
 
-            // Usamos nuestra función Helper para cada producto
-            datos.forEach(producto => {
-                const tarjeta = crearTarjetaHardware(producto);
-                apiContainer.appendChild(tarjeta);
-            });
-        })
-        .catch(error => {
-            console.error('Hubo un problema con la Fetch API:', error);
-            // Mensaje de error visible y seguro
-            apiContainer.textContent = 'No se pudo cargar el hardware en este momento. Inténtalo más tarde.';
-            apiContainer.className = 'row g-4 text-center text-danger fw-bold';
-        });
+/**
+ * Helper extra para renderizar el contenedor completo sin repetir código
+ */
+function renderizarHardware(datos, contenedor) { // Función para renderizar los productos de hardware en el contenedor del DOM
+    contenedor.textContent = ''; // Limpieza segura
+    contenedor.className = 'row g-4'; // Restaura el grid
+
+    datos.forEach(producto => { // Itera sobre cada producto y crea su tarjeta correspondiente
+        const tarjeta = crearTarjetaHardware(producto);
+        contenedor.appendChild(tarjeta);
+    });
 }
