@@ -1,0 +1,30 @@
+[
+    {
+        "id": 5,
+        "title": "Red Dead Redemption 2 - [PS5]",
+        "price": 45990,
+        "image": "assets/img/RDR_II.png",
+        "category": "Mundo Abierto"
+    },
+    {
+        "id": 6,
+        "title": "God of War Ragnarök - [PS5]",
+        "price": 52990,
+        "image": "assets/img/GOW_RAGNAROK.png",
+        "category": "Acción"
+    },
+    {
+        "id": 7,
+        "title": "The Legend of Zelda: Tears of the Kingdom - [Switch]",
+        "price": 59990,
+        "image": "assets/img/Zelda_TOTK.png",
+        "category": "Aventura"
+    },
+    {
+        "id": 8,
+        "title": "World of Warcraft Forever - [PC]",
+        "price": 39990,
+        "image": "assets/img/WoW_Forever.png",
+        "category": "MMORPG"
+    }
+]
