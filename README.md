@@ -192,8 +192,6 @@ Luego abre en el navegador:
 http://localhost:8000
 ```
 
-Para ejecutar la implementación React, consulta la sección [Nueva implementación con React](#nueva-implementación-con-react).
-
 ## Observaciones
 
 Este proyecto es una simulación de una tienda de videojuegos enfocada en la práctica de frontend, especialmente en:
