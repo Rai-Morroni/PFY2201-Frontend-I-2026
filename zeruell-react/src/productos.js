@@ -6,7 +6,7 @@ export const productosData = [
         precioNormal: 45990,
         precioOferta: 29990,
         descripcion: "Adéntrate en Night City y forja tu propio destino como mercenario cibernético.",
-        imagen: "/img/cyberpunk_2077.jpg" 
+        imagen: "./img/cyberpunk_2077.jpg"
     },
     {
         id: 2,
@@ -14,7 +14,7 @@ export const productosData = [
         precioNormal: 65990,
         precioOferta: 59990,
         descripcion: "Explora las Tierras Intermedias en el aclamado RPG de acción de FromSoftware.",
-        imagen: "/img/elden_ring.jpg"
+        imagen: "./img/elden_ring.jpg"
     },
     {
         id: 3,
@@ -22,7 +22,7 @@ export const productosData = [
         precioNormal: 29990,
         precioOferta: 19990,
         descripcion: "Domina la oscuridad en esta secuela con combate brutal y personalización extrema.",
-        imagen: "/img/poe_2.jpg"
+        imagen: "./img/poe_2.jpg"
     },
     {
         id: 4,
@@ -30,6 +30,6 @@ export const productosData = [
         precioNormal: 69990,
         precioOferta: 54990,
         descripcion: "Balanceate por Nueva York con Peter y Miles enfrentando a Venom y Kraven.",
-        imagen: "/img/spiderman_2.jpg"
+        imagen: "./img/spiderman_2.jpg"
     }
 ];
