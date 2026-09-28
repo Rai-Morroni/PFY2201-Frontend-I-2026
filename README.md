@@ -2,6 +2,75 @@
 
 Zeruell Games es una tienda de videojuegos creada como proyecto de desarrollo frontend. La aplicación presenta un catálogo de productos en estilo moderno, con enfoque en una experiencia visual atractiva y una navegación sencilla para explorar juegos, buscar títulos y agregarlos a un carrito de compras.
 
+El repositorio incluye dos implementaciones de la tienda:
+
+- una versión inicial con HTML, CSS y JavaScript en la raíz del proyecto
+- una nueva versión construida con React y Vite dentro de `zeruell-react/`
+
+## Nueva implementación con React
+
+La carpeta `zeruell-react/` contiene la migración de la tienda a componentes React. La aplicación mantiene el catálogo de videojuegos y agrega una gestión de carrito basada en el estado del componente principal.
+
+### Funcionalidades
+
+- renderizado del catálogo a partir de los productos definidos en `src/productos.js`
+- tarjetas responsivas con imagen, descripción, precio normal y precio de oferta
+- agregado de productos al carrito
+- eliminación individual de productos
+- contador de productos seleccionados
+- cálculo automático del total usando el precio de oferta
+- estado visual para carrito vacío
+- identificadores únicos para permitir agregar varias veces el mismo producto
+
+### Componentes principales
+
+```text
+zeruell-react/
+├── public/img/              # imágenes públicas de los productos
+├── src/
+│   ├── App.jsx              # estado del carrito y composición principal
+│   ├── productos.js         # datos del catálogo
+│   ├── index.css            # estilos globales
+│   ├── App.css              # estilos de la aplicación
+│   └── components/
+│       ├── ProductList.jsx  # listado y tarjetas de productos
+│       ├── ShoppingCart.jsx # resumen y acciones del carrito
+│       └── CartTotal.jsx    # cálculo y presentación del total
+├── package.json
+└── vite.config.js
+```
+
+### Tecnologías de la versión React
+
+- React 19
+- React DOM
+- Vite
+- Bootstrap 5
+- JavaScript con módulos ES
+- ESLint
+
+### Ejecutar la versión React
+
+Desde la carpeta `zeruell-react/`, instala las dependencias y levanta el servidor de desarrollo:
+
+```bash
+cd zeruell-react
+npm install
+npm run dev
+```
+
+Vite mostrará en la terminal la dirección local de la aplicación, normalmente `http://localhost:5173`.
+
+Comandos disponibles:
+
+```bash
+npm run dev       # inicia el servidor de desarrollo
+npm run build     # genera la versión de producción en dist/
+npm run preview   # previsualiza la compilación de producción
+npm run lint      # revisa el código con ESLint
+npm run deploy    # publica dist/ mediante gh-pages
+```
+
 ## Descripción general
 
 Este proyecto está desarrollado con HTML, CSS y JavaScript, y utiliza Bootstrap 5 para el diseño responsivo. El sitio simula una tienda online de videojuegos con:
@@ -79,6 +148,13 @@ Se implementan mensajes visuales para mejorar la experiencia del usuario:
 - Fetch API
 - JSON local
 
+La versión React utiliza además:
+
+- React 19
+- Vite
+- Bootstrap 5 mediante clases utilitarias
+- estado local con `useState`
+
 ## Estructura del proyecto
 
 ```text
@@ -92,6 +168,10 @@ tienda-videojuegos-zeruell/
 │   ├── js/
 │   │   └── main.js
 │   └── productos.json
+├── zeruell-react/
+│   ├── package.json
+│   ├── public/
+│   └── src/
 ├── Evidencias/
 └── .git/
 ```
@@ -111,6 +191,8 @@ Luego abre en el navegador:
 ```text
 http://localhost:8000
 ```
+
+Para ejecutar la implementación React, consulta la sección [Nueva implementación con React](#nueva-implementación-con-react).
 
 ## Observaciones
 
