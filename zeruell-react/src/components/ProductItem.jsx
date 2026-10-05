@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
 import { formatCurrency } from '../utils/helpers';
 
-export const ProductItem = ({ producto, agregarAlCarrito }) => {
+export const ProductItem = ({ producto, carrito, agregarAlCarrito }) => {
     // Valores por defecto por si la API falla o faltan datos
     const { 
+        id,
         nombre = 'Producto sin nombre', 
         descripcion = 'Sin descripción', 
         precioNormal = 0, 
         precioOferta = 0, 
         imagen = '' 
     } = producto;
+
+    // Validación condicional: ¿El producto ya existe en el estado del carrito?
+    const estaEnCarrito = carrito.some(item => item.id === id);
 
     return (
         <div className="col-12 col-md-6 col-lg-3">
@@ -21,8 +25,14 @@ export const ProductItem = ({ producto, agregarAlCarrito }) => {
                     <div className="mt-auto">
                         <p className="text-decoration-line-through text-danger mb-0">{formatCurrency(precioNormal)}</p>
                         <p className="text-info fw-bold fs-5 mb-3">{formatCurrency(precioOferta)}</p>
-                        <button className="btn btn-outline-info w-100 rounded-pill" onClick={() => agregarAlCarrito(producto)}>
-                            Añadir al carrito
+                        
+                        {/* Renderizado Condicional del Botón */}
+                        <button 
+                            className={`btn w-100 rounded-pill ${estaEnCarrito ? 'btn-success' : 'btn-outline-info'}`} 
+                            onClick={() => agregarAlCarrito(producto)}
+                            disabled={estaEnCarrito}
+                        >
+                            {estaEnCarrito ? '✅ En el carrito' : 'Añadir al carrito'}
                         </button>
                     </div>
                 </div>
@@ -31,15 +41,8 @@ export const ProductItem = ({ producto, agregarAlCarrito }) => {
     );
 };
 
-// Validación estricta de las propiedades esperadas
 ProductItem.propTypes = {
-    producto: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        nombre: PropTypes.string.isRequired,
-        descripcion: PropTypes.string,
-        precioNormal: PropTypes.number,
-        precioOferta: PropTypes.number.isRequired,
-        imagen: PropTypes.string
-    }).isRequired,
+    producto: PropTypes.object.isRequired,
+    carrito: PropTypes.array.isRequired,
     agregarAlCarrito: PropTypes.func.isRequired,
 };
