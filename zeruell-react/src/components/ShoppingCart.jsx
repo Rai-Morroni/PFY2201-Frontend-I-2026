@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
+import { CartItem } from './CartItem';
 import { CartTotal } from './CartTotal';
 
-export const ShoppingCart = ({ carrito, eliminarDelCarrito }) => {
+export const ShoppingCart = ({ carrito = [], eliminarDelCarrito }) => {
     return (
         <section className="p-4 bg-black border border-info rounded-4 mt-5">
             <h3 className="text-info text-center mb-4">
@@ -14,17 +16,20 @@ export const ShoppingCart = ({ carrito, eliminarDelCarrito }) => {
                     </li>
                 ) : (
                     carrito.map((item) => (
-                        <li key={item.uniqueId} className="list-group-item bg-dark text-light border-secondary d-flex justify-content-between align-items-center">
-                            {item.nombre}
-                            <div>
-                                <span className="badge bg-info text-dark rounded-pill me-3">${item.precioOferta.toLocaleString('es-CL')}</span>
-                                <button className="btn btn-sm btn-danger rounded-circle" onClick={() => eliminarDelCarrito(item.uniqueId)}>X</button>
-                            </div>
-                        </li>
+                        <CartItem 
+                            key={item.uniqueId} 
+                            item={item} 
+                            eliminarDelCarrito={eliminarDelCarrito} 
+                        />
                     ))
                 )}
             </ul>
             <CartTotal carrito={carrito} />
         </section>
     );
+};
+
+ShoppingCart.propTypes = {
+    carrito: PropTypes.array.isRequired,
+    eliminarDelCarrito: PropTypes.func.isRequired,
 };
