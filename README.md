@@ -1,43 +1,118 @@
 # Zeruell Games
 
-Zeruell Games es una tienda de videojuegos creada como proyecto de desarrollo frontend. La aplicación presenta un catálogo de productos en estilo moderno, con enfoque en una experiencia visual atractiva y una navegación sencilla para explorar juegos, buscar títulos y agregarlos a un carrito de compras.
+Zeruell Games es un proyecto académico de tienda de videojuegos desarrollado en dos etapas: una versión estática con HTML, CSS y JavaScript y una implementación moderna en React con Vite. El objetivo es simular una experiencia de e-commerce con catálogo, promociones y carrito de compras en una interfaz visual atractiva.
 
-El repositorio incluye dos implementaciones de la tienda:
+El repositorio actual incluye ambas implementaciones, aunque la versión React es la más reciente y representa el estado actual del proyecto.
 
-- una versión inicial con HTML, CSS y JavaScript en la raíz del proyecto
-- una nueva versión construida con React y Vite dentro de `zeruell-react/`
+## Estado actual del proyecto
 
-## Nueva implementación con React
+La implementación actual se encuentra en la carpeta `zeruell-react/` y utiliza:
 
-La carpeta `zeruell-react/` contiene la migración de la tienda a componentes React. La aplicación mantiene el catálogo de videojuegos y agrega una gestión de carrito basada en el estado del componente principal.
+- React 19
+- Vite
+- Bootstrap 5
+- JavaScript moderno con componentes funcionales
+- Estado local para gestionar el catálogo y el carrito
+- Fetch de un archivo JSON local para cargar los productos
 
-### Funcionalidades
+La lógica principal del proyecto consiste en mostrar juegos con precio normal y precio de oferta, permitir agregarlos al carrito y calcular el total automáticamente en base a los precios promocionales.
 
-- renderizado del catálogo a partir de los productos definidos en `src/productos.js`
+## Estructura del repositorio
+
+```text
+tienda-videojuegos-zeruell/
+├── index.html                   # versión estática base del proyecto
+├── README.md                    # documentación del proyecto
+├── assets/
+│   ├── css/
+│   ├── img/
+│   ├── js/
+│   └── productos.json
+├── zeruell-react/               # implementación actual en React
+│   ├── package.json
+│   ├── public/
+│   │   ├── img/
+│   │   ├── productos.json
+│   │   └── vite.svg
+│   └── src/
+│       ├── App.jsx
+│       ├── App.css
+│       ├── index.css
+│       ├── main.jsx
+│       ├── components/
+│       │   ├── ProductItem.jsx
+│       │   ├── ProductList.jsx
+│       │   ├── CartItem.jsx
+│       │   ├── CartTotal.jsx
+│       │   └── ShoppingCart.jsx
+│       └── utils/
+│           └── helpers.js
+├── Evidencias/
+├── .git/
+├── package.json
+├── package-lock.json
+└── node_modules/
+```
+
+## Implementación estática (versión base)
+
+La versión inicial del proyecto se encuentra en la raíz del repositorio y replica una tienda online con:
+
+- barra de navegación con logo y enlaces de sección
+- hero section con carrusel promocional
+- catálogo dinámico cargado con `fetch()` desde un JSON local
+- búsqueda de productos por nombre
+- catálogo clásico de tarjetas estáticas
+- carrito de compras con cálculo de total
+- mensajes visuales y feedback al usuario
+- diseño responsivo con Bootstrap 5
+
+### Cómo ejecutar la versión estática
+
+No requiere instalación de dependencias. Puedes abrir directamente `index.html` en el navegador o levantar un servidor local:
+
+```bash
+python -m http.server 8000
+```
+
+Luego visita:
+
+```text
+http://localhost:8000
+```
+
+## Implementación actual en React
+
+La carpeta `zeruell-react/` contiene la versión moderna del proyecto. Esta implementación mantiene la idea central de la tienda y refuerza la estructura con componentes React.
+
+### Funcionalidades principales
+
+- renderizado del catálogo desde `public/productos.json`
 - tarjetas responsivas con imagen, descripción, precio normal y precio de oferta
 - agregado de productos al carrito
 - eliminación individual de productos
-- contador de productos seleccionados
+- contador de productos agregados
 - cálculo automático del total usando el precio de oferta
-- estado visual para carrito vacío
-- identificadores únicos para permitir agregar varias veces el mismo producto
+- estado del carrito vacío visualmente identificado
+- identificadores únicos con `crypto.randomUUID()` para permitir repetir productos sin conflicto
+- diseño oscuro con Bootstrap y una apariencia moderna
 
 ### Componentes principales
 
 ```text
-zeruell-react/
-├── public/img/              # imágenes públicas de los productos
-├── src/
-│   ├── App.jsx              # estado del carrito y composición principal
-│   ├── productos.js         # datos del catálogo
-│   ├── index.css            # estilos globales
-│   ├── App.css              # estilos de la aplicación
-│   └── components/
-│       ├── ProductList.jsx  # listado y tarjetas de productos
-│       ├── ShoppingCart.jsx # resumen y acciones del carrito
-│       └── CartTotal.jsx    # cálculo y presentación del total
-├── package.json
-└── vite.config.js
+src/
+├── App.jsx            # estado global del carrito y composición principal
+├── App.css            # estilos personalizados de la aplicación
+├── index.css           # estilos base y ajustes globales
+├── main.jsx            # bootstrap del proyecto React
+├── components/
+│   ├── ProductItem.jsx    # tarjeta de cada producto
+│   ├── ProductList.jsx    # listado de productos
+│   ├── CartItem.jsx       # fila de producto dentro del carrito
+│   ├── CartTotal.jsx      # cálculo y visualización del total
+│   └── ShoppingCart.jsx   # resumen del carrito
+└── utils/
+    └── helpers.js         # utilidades de moneda y cálculo total
 ```
 
 ### Tecnologías de la versión React
@@ -46,12 +121,12 @@ zeruell-react/
 - React DOM
 - Vite
 - Bootstrap 5
-- JavaScript con módulos ES
 - ESLint
+- Gh-pages para despliegue
 
 ### Ejecutar la versión React
 
-Desde la carpeta `zeruell-react/`, instala las dependencias y levanta el servidor de desarrollo:
+Desde la carpeta `zeruell-react/`:
 
 ```bash
 cd zeruell-react
@@ -59,158 +134,49 @@ npm install
 npm run dev
 ```
 
-Vite mostrará en la terminal la dirección local de la aplicación, normalmente `http://localhost:5173`.
+La app quedará disponible normalmente en:
 
-Comandos disponibles:
+```text
+http://localhost:5173
+```
+
+### Scripts disponibles
 
 ```bash
 npm run dev       # inicia el servidor de desarrollo
-npm run build     # genera la versión de producción en dist/
-npm run preview   # previsualiza la compilación de producción
-npm run lint      # revisa el código con ESLint
-npm run deploy    # publica dist/ mediante gh-pages
+npm run build     # compila la aplicación para producción
+npm run preview   # vista previa del build generado
+npm run lint      # valida el código con ESLint
+npm run deploy    # publica la carpeta dist en GitHub Pages
 ```
 
-## Descripción general
+## Técnicas y objetivos del proyecto
 
-Este proyecto está desarrollado con HTML, CSS y JavaScript, y utiliza Bootstrap 5 para el diseño responsivo. El sitio simula una tienda online de videojuegos con:
+Este proyecto está orientado a practicar conceptos del desarrollo frontend, especialmente:
 
-- banner principal con carrusel promocional
-- catálogo dinámico cargado desde un archivo JSON local
-- búsqueda de productos por nombre
-- carrito de compras con actualización de total
-- tarjetas de productos con acción de agregar
-- mensajes de error y feedback visual para mejor experiencia de usuario
-
-## Funcionalidades principales
-
-### 1. Header y navegación
-El sitio cuenta con una barra de navegación superior con:
-
-- logo de la marca
-- enlaces de navegación (Inicio, Catálogo, Ofertas)
-- campo de búsqueda integrado en el navbar
-
-Esto permite que la tienda se sienta más cercana a una interfaz real de e-commerce.
-
-### 2. Carrusel principal
-Se incluye un hero section con carrusel de imágenes, mostrando promociones y videojuegos destacados. Este componente se construye con Bootstrap y ayuda a resaltar ofertas y contenido visual del sitio.
-
-### 3. Catálogo dinámico desde JSON
-El proyecto carga productos desde un archivo local llamado `assets/productos.json` usando `fetch()`. Esto permite mantener el catálogo modular y facilitar futuras actualizaciones sin necesidad de editar directamente el HTML.
-
-Entre los datos cargados se incluyen:
-
-- título del juego
-- precio
-- imagen
-- categoría
-
-### 4. Búsqueda de productos
-El buscador permite filtrar los productos cargados desde el JSON en tiempo real al enviar el formulario o al escribir en el campo de búsqueda.
-
-La lógica de búsqueda:
-
-- normaliza el texto en minúsculas
-- filtra los productos por coincidencia en el nombre
-- renderiza solo los resultados coincidentes
-- si el usuario borra la búsqueda, vuelve a mostrar el catálogo completo
-
-### 5. Catálogo clásico de productos
-Además del catálogo dinámico, el sitio incluye un conjunto de tarjetas estáticas con productos destacados de la tienda. Cada una cuenta con:
-
-- imagen del juego
-- nombre del producto
-- precio
-- botón para agregar al carrito
-
-### 6. Carrito de compras
-El proyecto incluye una sección de resumen del carrito donde se muestran los productos agregados y el total. Las funcionalidades del carrito son:
-
-- agregar juegos desde el catálogo dinámico y el catálogo clásico
-- mostrar la lista de productos seleccionados
-- calcular el total en tiempo real
-- mostrar el estado de carrito vacío cuando no hay productos
-
-### 7. Feedback visual y manejo de errores
-Se implementan mensajes visuales para mejorar la experiencia del usuario:
-
-- cambio de texto y color del botón al agregar un producto
-- toast de error si no se logra cargar el catálogo dinámico
-- estado de carga inicial mientras se traen los productos del JSON
-
-## Tecnologías utilizadas
-
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap 5
-- Fetch API
-- JSON local
-
-La versión React utiliza además:
-
-- React 19
-- Vite
-- Bootstrap 5 mediante clases utilitarias
-- estado local con `useState`
-
-## Estructura del proyecto
-
-```text
-tienda-videojuegos-zeruell/
-├── index.html
-├── README.md
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   ├── img/
-│   ├── js/
-│   │   └── main.js
-│   └── productos.json
-├── zeruell-react/
-│   ├── package.json
-│   ├── public/
-│   └── src/
-├── Evidencias/
-└── .git/
-```
-
-## Cómo ejecutar el proyecto
-
-No requiere instalación de dependencias ni un servidor complejo. Puedes abrir el archivo `index.html` directamente en el navegador o ejecutar un servidor local simple.
-
-Opción recomendada:
-
-```bash
-python -m http.server 8000
-```
-
-Luego abre en el navegador:
-
-```text
-http://localhost:8000
-```
-
-## Observaciones
-
-Este proyecto es una simulación de una tienda de videojuegos enfocada en la práctica de frontend, especialmente en:
-
-- manipulación del DOM
+- manipulación del DOM y renderizado dinámico
 - consumo de datos desde JSON
-- eventos de usuario
-- diseño responsivo
+- estructura de componentes en React
+- gestión de estado con hooks
+- diseño responsivo con Bootstrap
 - lógica de carrito de compras
-- buenas prácticas en JavaScript moderno
+- buenas prácticas de organización de archivos y reutilización de componentes
 
-## Objetivo del proyecto
+## Objetivos del proyecto
 
-El objetivo principal es demostrar cómo crear una tienda visualmente atractiva y funcional usando tecnologías básicas del desarrollo web, con una base sólida para futuras mejoras como:
+El objetivo principal es demostrar cómo crear una tienda visualmente atractiva y funcional usando tecnologías web modernas, con base sólida para futuras mejoras tales como:
 
 - filtros por categoría
-- modal de detalle de producto
-- almacenamiento del carrito en localStorage
-- sistema de pagos o checkout
+- modal con detalle del producto
+- almacenamiento del carrito en `localStorage`
+- checkout o sistema de pago
 - integración con una API real
+- búsqueda avanzada y ordenamiento de productos
+
+## Observaciones finales
+
+- La versión HTML/JS representa la base pedagógica del proyecto.
+- La versión React es la evolución actual y la que mejor refleja el estado actual del repositorio.
+- La documentación y la estructura del proyecto se mantienen alineadas con los archivos reales presentes en el proyecto.
 
 
