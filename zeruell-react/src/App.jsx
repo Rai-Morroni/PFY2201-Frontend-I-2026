@@ -7,7 +7,7 @@ function App() {
     const [productos, setProductos] = useState([]);
     const [carrito, setCarrito] = useState([]);
 
-    // 2. Manejo de Efectos: Carga dinámica de datos al montar el componente
+    // 2. Manejo de Efectos: Carga dinámica de datos al montar el componente.    
     useEffect(() => {
         const cargarProductos = async () => {
             try {
