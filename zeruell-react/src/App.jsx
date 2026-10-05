@@ -16,7 +16,7 @@ function App() {
                 const datos = await respuesta.json();
                 setProductos(datos);
             } catch (error) {
-                console.error("Error cargando los productos:", error);
+                console.error("Error cargando los productos:", error); 
             }
         };
         
@@ -38,7 +38,7 @@ function App() {
             <div className="container">
                 <header className="text-center mb-5 border-bottom border-info pb-4">
                     <h1 className="text-info fw-bold display-4">Zeruell Games</h1>
-                    <p className="text-light fs-5">Tu tienda de Videojuegos (Versión React)</p>
+                    <p className="text-light fs-5">Tu tienda de Videojuegos (Versión React S8)</p>
                 </header>
 
                 <h2 className="text-light mb-4">Catálogo de Productos</h2>
