@@ -44,6 +44,10 @@ function App() {
         setCarrito(nuevoCarrito);
     };
 
+    const vaciarCarrito = () => {
+        setCarrito([]);
+    };
+
     return (
         <div className="bg-dark min-vh-100">
             {/* Función al Navbar para que los botones puedan cambiar la vista */}
@@ -83,7 +87,11 @@ function App() {
                                 agregarAlCarrito={agregarAlCarrito} 
                             />
                             
-                            <ShoppingCart carrito={carrito} eliminarDelCarrito={eliminarDelCarrito} />
+                            <ShoppingCart
+                                carrito={carrito}
+                                eliminarDelCarrito={eliminarDelCarrito}
+                                vaciarCarrito={vaciarCarrito}
+                            />
                         </section>
                     </>
                 ) : (
