@@ -15,7 +15,14 @@ export const ContactForm = () => {
     // Lógica de validación
     const validar = () => {
         let nuevosErrores = {};
-        if (!formData.nombre.trim()) nuevosErrores.nombre = "El nombre es obligatorio.";
+        const nombre = formData.nombre.trim();
+        const mensaje = formData.mensaje.trim();
+
+        if (!nombre) {
+            nuevosErrores.nombre = "El nombre es obligatorio.";
+        } else if (nombre.length < 5) {
+            nuevosErrores.nombre = "El nombre debe tener al menos 5 caracteres.";
+        }
         
         if (!formData.email.trim()) {
             nuevosErrores.email = "El email es obligatorio.";
@@ -23,7 +30,11 @@ export const ContactForm = () => {
             nuevosErrores.email = "El formato del correo no es válido.";
         }
 
-        if (!formData.mensaje.trim()) nuevosErrores.mensaje = "El mensaje no puede estar vacío.";
+        if (!mensaje) {
+            nuevosErrores.mensaje = "El mensaje no puede estar vacío.";
+        } else if (mensaje.length < 10) {
+            nuevosErrores.mensaje = "El mensaje debe tener al menos 10 caracteres.";
+        }
         
         return nuevosErrores;
     };
@@ -53,19 +64,19 @@ export const ContactForm = () => {
             <form onSubmit={handleSubmit} noValidate>
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label text-light">Nombre Completo</label>
-                    <input type="text" className={`form-control bg-dark text-light border-secondary ${errores.nombre ? 'is-invalid' : ''}`} id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} />
+                    <input type="text" className={`form-control bg-dark text-light border-secondary ${errores.nombre ? 'is-invalid' : ''}`} id="nombre" name="nombre" placeholder="Escribe tu nombre completo" value={formData.nombre} onChange={handleChange} />
                     {errores.nombre && <div className="invalid-feedback">{errores.nombre}</div>}
                 </div>
                 
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label text-light">Correo Electrónico</label>
-                    <input type="email" className={`form-control bg-dark text-light border-secondary ${errores.email ? 'is-invalid' : ''}`} id="email" name="email" value={formData.email} onChange={handleChange} />
+                    <input type="email" className={`form-control bg-dark text-light border-secondary ${errores.email ? 'is-invalid' : ''}`} id="email" name="email" placeholder="nombre@ejemplo.com" value={formData.email} onChange={handleChange} />
                     {errores.email && <div className="invalid-feedback">{errores.email}</div>}
                 </div>
                 
                 <div className="mb-3">
                     <label htmlFor="mensaje" className="form-label text-light">Mensaje</label>
-                    <textarea className={`form-control bg-dark text-light border-secondary ${errores.mensaje ? 'is-invalid' : ''}`} id="mensaje" name="mensaje" rows="4" value={formData.mensaje} onChange={handleChange}></textarea>
+                    <textarea className={`form-control bg-dark text-light border-secondary ${errores.mensaje ? 'is-invalid' : ''}`} id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje aquí. Debe contener al menos 10 caracteres." value={formData.mensaje} onChange={handleChange}></textarea>
                     {errores.mensaje && <div className="invalid-feedback">{errores.mensaje}</div>}
                 </div>
                 

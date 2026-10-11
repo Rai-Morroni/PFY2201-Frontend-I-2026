@@ -10,6 +10,9 @@ function App() {
     const [carrito, setCarrito] = useState([]);
     const [filtro, setFiltro] = useState('Todas'); // Nuevo estado para la categorías
 
+    // Nuevo Estado: Controla qué vista se renderiza en la pantalla principal
+    const [vistaActual, setVistaActual] = useState('inicio');
+
     // 2. Manejo de Efectos: Carga dinámica de datos al montar el componente.    
     useEffect(() => {
         const cargarProductos = async () => {
@@ -42,46 +45,51 @@ function App() {
     };
 
     return (
-        <div className="bg-dark min-vh-100" id="inicio">
-            {/* 4. Barra de Navegación Modularizada */}
-            <Navbar />
+        <div className="bg-dark min-vh-100">
+            {/* Función al Navbar para que los botones puedan cambiar la vista */}
+            <Navbar setVistaActual={setVistaActual} />
 
             {/* Uso de etiquetas semánticas HTML5 (main, section, footer) */}
             <main className="container py-5">
                 
-                <header className="text-center mb-5 border-bottom border-info pb-4">
-                    <h1 className="text-info fw-bold display-4">Explora Nuestro Catálogo</h1>
-                    <p className="text-light fs-5">Los mejores títulos para todas las plataformas.</p>
-                </header>
+                {/* RENDERIZADO CONDICIONAL: ¿Qué vista eligió el usuario? */}
+                {vistaActual === 'inicio' ? (
+                    // VISTA 1: INICIO Y CATÁLOGO
+                    <>
+                        <header className="text-center mb-5 border-bottom border-info pb-4">
+                            <h1 className="text-info fw-bold display-4">Explora Nuestro Catálogo</h1>
+                            <p className="text-light fs-5">Los mejores títulos para todas las plataformas - EFT S9.</p>
+                        </header>
 
-                <section id="catalogo">
-                    {/* Sección de Filtro */}
-                    <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
-                        <h2 className="text-light m-0">Catálogo de Productos</h2>
-                        <select 
-                            className="form-select w-auto bg-black text-light border-info"
-                            value={filtro}
-                            onChange={(e) => setFiltro(e.target.value)}
-                        >
-                            <option value="Todas">Todas las categorías</option>
-                            <option value="Acción">Acción</option>
-                            <option value="RPG">RPG</option>
-                            <option value="Aventura">Aventura</option>
-                        </select>
-                    </div>
+                        <section>
+                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                                <h2 className="text-light m-0">Catálogo de Productos</h2>
+                                <select 
+                                    className="form-select w-auto bg-black text-light border-info"
+                                    value={filtro}
+                                    onChange={(e) => setFiltro(e.target.value)}
+                                >
+                                    <option value="Todas">Todas las categorías</option>
+                                    <option value="Acción">Acción</option>
+                                    <option value="RPG">RPG</option>
+                                    <option value="Aventura">Aventura</option>
+                                </select>
+                            </div>
 
-                    {/* Pasa los productos FILTRADOS en lugar de la lista completa */}
-                    <ProductList 
-                        productos={productosFiltrados} 
-                        carrito={carrito} 
-                        agregarAlCarrito={agregarAlCarrito} 
-                    />
-                    
-                    <ShoppingCart carrito={carrito} eliminarDelCarrito={eliminarDelCarrito} />
-                </section>
-
-                {/* 5. Formulario de Contacto Modularizado con Validaciones */}
-                <ContactForm />
+                            {/* 4. Pasa los productos FILTRADOS en lugar de la lista completa */}
+                            <ProductList 
+                                productos={productosFiltrados} 
+                                carrito={carrito} 
+                                agregarAlCarrito={agregarAlCarrito} 
+                            />
+                            
+                            <ShoppingCart carrito={carrito} eliminarDelCarrito={eliminarDelCarrito} />
+                        </section>
+                    </>
+                ) : (
+                    // VISTA 2: Formulario de Contacto Modularizado con Validaciones                    
+                    <ContactForm />
+                )}
 
             </main>
 

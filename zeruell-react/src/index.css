@@ -1,0 +1,4 @@
+#contacto .form-control::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
