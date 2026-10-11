@@ -1,182 +1,120 @@
-# Zeruell Games
+# Zeruell Games — Tienda de videojuegos EFT Semana 9
 
-Zeruell Games es un proyecto académico de tienda de videojuegos desarrollado en dos etapas: una versión estática con HTML, CSS y JavaScript y una implementación moderna en React con Vite. El objetivo es simular una experiencia de e-commerce con catálogo, promociones y carrito de compras en una interfaz visual atractiva.
+Zeruell Games es un proyecto académico de tienda de videojuegos desarrollado para EFT Semana 9. La versión actual está construida con React y Vite, y permite explorar un catálogo de juegos, filtrarlos por categoría y gestionar un carrito de compras. El diseño utiliza Bootstrap y una paleta oscura con acentos celestes.
 
-El repositorio actual incluye ambas implementaciones, aunque la versión React es la más reciente y representa el estado actual del proyecto.
+La aplicación es una demostración de frontend: el carrito se mantiene en el estado de React y no se guarda en un servidor. El botón para continuar al pago está deshabilitado y solo indica que la funcionalidad estará disponible próximamente; no se procesan pagos.
 
-## Estado actual del proyecto
+## Proyecto desplegado
 
-La implementación actual se encuentra en la carpeta `zeruell-react/` y utiliza:
+Puedes visitar la aplicación en GitHub Pages:
 
-- React 19
+**[Abrir Zeruell Games](https://rai-morroni.github.io/PFY2201-Frontend-I-2026/)**
+
+## Requisitos previos
+
+- [Node.js](https://nodejs.org/) instalado. npm se incluye con Node.js.
+- Git instalado para clonar el repositorio.
+- Una terminal (PowerShell, Terminal de Windows, Git Bash o la terminal integrada de VS Code).
+
+## Instalación y ejecución local
+
+Sigue estos pasos para ejecutar la versión React en tu equipo:
+
+1. Abre una terminal.
+2. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/Rai-Morroni/PFY2201-Frontend-I-2026.git
+   ```
+
+3. Entra a la carpeta del repositorio:
+
+   ```bash
+   cd PFY2201-Frontend-I-2026
+   ```
+
+4. Entra a la carpeta de la aplicación React:
+
+   ```bash
+   cd zeruell-react
+   ```
+
+5. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+6. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm run dev
+   ```
+
+7. Abre en el navegador la dirección local que indique Vite en la terminal. Normalmente es:
+
+   ```text
+   http://localhost:5173
+   ```
+
+Para detener el servidor, vuelve a la terminal y presiona `Ctrl+C`.
+
+## Funcionalidades actuales
+
+- Catálogo cargado desde `public/productos.json`.
+- Filtro de juegos por categoría.
+- Tarjetas de producto con imagen, descripción y precios.
+- Agregado y eliminación individual de productos en el carrito.
+- Opción para vaciar el carrito completo.
+- Contador de productos y cálculo automático del total con el precio de oferta.
+- Botón de pago deshabilitado con el mensaje «Próximamente»; no existe procesamiento de pago.
+- Formulario de contacto con validación de nombre (mínimo 5 caracteres), correo y mensaje (mínimo 10 caracteres).
+- Mensajes de validación y de envío del formulario en la interfaz.
+- Interfaz responsiva con Bootstrap.
+
+## Tecnologías
+
+- React 19 y React DOM
 - Vite
 - Bootstrap 5
-- JavaScript moderno con componentes funcionales
-- Estado local para gestionar el catálogo y el carrito
-- Fetch de un archivo JSON local para cargar los productos
-
-La lógica principal del proyecto consiste en mostrar juegos con precio normal y precio de oferta, permitir agregarlos al carrito y calcular el total automáticamente en base a los precios promocionales.
-
-## Estructura del repositorio
-
-```text
-tienda-videojuegos-zeruell/
-├── index.html                   # versión estática base del proyecto
-├── README.md                    # documentación del proyecto
-├── assets/
-│   ├── css/
-│   ├── img/
-│   ├── js/
-│   └── productos.json
-├── zeruell-react/               # implementación actual en React
-│   ├── package.json
-│   ├── public/
-│   │   ├── img/
-│   │   ├── productos.json
-│   │   └── vite.svg
-│   └── src/
-│       ├── App.jsx
-│       ├── App.css
-│       ├── index.css
-│       ├── main.jsx
-│       ├── components/
-│       │   ├── ProductItem.jsx
-│       │   ├── ProductList.jsx
-│       │   ├── CartItem.jsx
-│       │   ├── CartTotal.jsx
-│       │   └── ShoppingCart.jsx
-│       └── utils/
-│           └── helpers.js
-├── Evidencias/
-├── .git/
-├── package.json
-├── package-lock.json
-└── node_modules/
-```
-
-## Implementación estática (versión base)
-
-La versión inicial del proyecto se encuentra en la raíz del repositorio y replica una tienda online con:
-
-- barra de navegación con logo y enlaces de sección
-- hero section con carrusel promocional
-- catálogo dinámico cargado con `fetch()` desde un JSON local
-- búsqueda de productos por nombre
-- catálogo clásico de tarjetas estáticas
-- carrito de compras con cálculo de total
-- mensajes visuales y feedback al usuario
-- diseño responsivo con Bootstrap 5
-
-### Cómo ejecutar la versión estática
-
-No requiere instalación de dependencias. Puedes abrir directamente `index.html` en el navegador o levantar un servidor local:
-
-```bash
-python -m http.server 8000
-```
-
-Luego visita:
-
-```text
-http://localhost:8000
-```
-
-## Implementación actual en React
-
-La carpeta `zeruell-react/` contiene la versión moderna del proyecto. Esta implementación mantiene la idea central de la tienda y refuerza la estructura con componentes React.
-
-### Funcionalidades principales
-
-- renderizado del catálogo desde `public/productos.json`
-- tarjetas responsivas con imagen, descripción, precio normal y precio de oferta
-- agregado de productos al carrito
-- eliminación individual de productos
-- contador de productos agregados
-- cálculo automático del total usando el precio de oferta
-- estado del carrito vacío visualmente identificado
-- identificadores únicos con `crypto.randomUUID()` para permitir repetir productos sin conflicto
-- diseño oscuro con Bootstrap y una apariencia moderna
-
-### Componentes principales
-
-```text
-src/
-├── App.jsx            # estado global del carrito y composición principal
-├── App.css            # estilos personalizados de la aplicación
-├── index.css           # estilos base y ajustes globales
-├── main.jsx            # bootstrap del proyecto React
-├── components/
-│   ├── ProductItem.jsx    # tarjeta de cada producto
-│   ├── ProductList.jsx    # listado de productos
-│   ├── CartItem.jsx       # fila de producto dentro del carrito
-│   ├── CartTotal.jsx      # cálculo y visualización del total
-│   └── ShoppingCart.jsx   # resumen del carrito
-└── utils/
-    └── helpers.js         # utilidades de moneda y cálculo total
-```
-
-### Tecnologías de la versión React
-
-- React 19
-- React DOM
-- Vite
-- Bootstrap 5
+- JavaScript
 - ESLint
-- Gh-pages para despliegue
+- gh-pages para el despliegue
 
-### Ejecutar la versión React
-
-Desde la carpeta `zeruell-react/`:
-
-```bash
-cd zeruell-react
-npm install
-npm run dev
-```
-
-La app quedará disponible normalmente en:
+## Estructura principal
 
 ```text
-http://localhost:5173
+zeruell-react/
+├── public/
+│   └── productos.json
+├── src/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   ├── main.jsx
+│   ├── components/
+│   │   ├── ContactForm.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ProductItem.jsx
+│   │   ├── ProductList.jsx
+│   │   ├── CartItem.jsx
+│   │   ├── CartTotal.jsx
+│   │   └── ShoppingCart.jsx
+│   └── utils/
+│       └── helpers.js
+└── package.json
 ```
 
-### Scripts disponibles
+El repositorio también conserva en su raíz una implementación estática anterior en HTML, CSS y JavaScript. Para trabajar con la aplicación actual, ejecuta los comandos desde `zeruell-react/`.
+
+## Comandos disponibles
+
+Ejecuta estos comandos desde la carpeta `zeruell-react/`:
 
 ```bash
-npm run dev       # inicia el servidor de desarrollo
-npm run build     # compila la aplicación para producción
-npm run preview   # vista previa del build generado
-npm run lint      # valida el código con ESLint
-npm run deploy    # publica la carpeta dist en GitHub Pages
+npm run dev      # inicia el servidor de desarrollo
+npm run build    # genera la versión de producción en dist/
+npm run preview  # previsualiza la compilación de producción
+npm run lint     # revisa el código con ESLint
+npm run deploy   # publica dist/ en GitHub Pages
 ```
-
-## Técnicas y objetivos del proyecto
-
-Este proyecto está orientado a practicar conceptos del desarrollo frontend, especialmente:
-
-- manipulación del DOM y renderizado dinámico
-- consumo de datos desde JSON
-- estructura de componentes en React
-- gestión de estado con hooks
-- diseño responsivo con Bootstrap
-- lógica de carrito de compras
-- buenas prácticas de organización de archivos y reutilización de componentes
-
-## Objetivos del proyecto
-
-El objetivo principal es demostrar cómo crear una tienda visualmente atractiva y funcional usando tecnologías web modernas, con base sólida para futuras mejoras tales como:
-
-- filtros por categoría
-- modal con detalle del producto
-- almacenamiento del carrito en `localStorage`
-- checkout o sistema de pago
-- integración con una API real
-- búsqueda avanzada y ordenamiento de productos
-
-## Observaciones finales
-
-- La versión HTML/JS representa la base pedagógica del proyecto.
-- La versión React es la evolución actual y la que mejor refleja el estado actual del repositorio.
-- La documentación y la estructura del proyecto se mantienen alineadas con los archivos reales presentes en el proyecto.
-
-
